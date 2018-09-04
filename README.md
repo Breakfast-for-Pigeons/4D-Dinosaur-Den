@@ -46,6 +46,8 @@ ____________________________________
 
 4) Connect the Brachiosaurus motor
 
+![4d_dinosaur_den_4](https://user-images.githubusercontent.com/13591438/45011288-65781c80-afd7-11e8-9c8e-f4ab25b609aa.png)
+
 5) Connect the Pteranodon motor
 
 
