@@ -42,6 +42,8 @@ ____________________________________
 
 3) Connect the Triceratops motor
 
+![4d_dinosaur_den_3](https://user-images.githubusercontent.com/13591438/45010632-2b594b80-afd4-11e8-9426-534f05fe5ad2.png)
+
 4) Connect the Brachiosaurus motor
 
 5) Connect the Pteranodon motor
