@@ -1,7 +1,6 @@
 # 4D-Dinosaur-Den
 Use Python and a Raspberry Pi to control dinosaur motors.
 
-[![Click for 4d_t_rex video](https://user-images.githubusercontent.com/13591438/27263304-061e23c2-542c-11e7-9e05-475ceb3b18b2.JPG)](https://www.dropbox.com/s/4z465zu4e93wi4f/4D_T_rex.AVI?dl=0)
 
 ## Requirements:
   Innonex 4D Science T-rex from Amazing Toys Ltd.
@@ -35,11 +34,11 @@ ____________________________________
 
 1) Start by connecting the L293D chips, Pi cobbler, wires and, tactile buttons.
 
-![4d_dinosaur_den_1](https://user-images.githubusercontent.com/13591438/45009200-69eb0800-afcc-11e8-8661-7d2dbe38553c.png)
+![4d_dinosaur_den_1](https://user-images.githubusercontent.com/13591438/45009658-07dfd200-afcf-11e8-8201-a9c2db7d7b2a.png)
 
 2) Connect the T. rex motor
 
-![4d_dinosaur_den_2](https://user-images.githubusercontent.com/13591438/45009511-2396a880-afce-11e8-9b62-5424cfe76f23.png)
+![4d_dinosaur_den_2](https://user-images.githubusercontent.com/13591438/45010514-a2daab00-afd3-11e8-85e7-264d8f24baf8.png)
 
 3) Connect the Triceratops motor
 
