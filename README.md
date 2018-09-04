@@ -51,3 +51,5 @@ ____________________________________
 5) Connect the Pteranodon motor
 
 ![4d_dinosaur_den_5](https://user-images.githubusercontent.com/13591438/45015211-97dd4600-afe6-11e8-9e78-d5ddbdfef008.png)
+
+6) Use the ribbon cable to connect the Raspberry Pi to the Pi Cobbler.
