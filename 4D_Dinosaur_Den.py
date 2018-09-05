@@ -13,6 +13,7 @@ Author: Paul Ryan
 
 This program was written on a Raspberry Pi using the Geany IDE.
 '''
+
 ########################################################################
 #                         Import Modules                               #
 ########################################################################
@@ -74,6 +75,7 @@ def main():
     pressed, it will activate the specified dinosaur. The red button
     will stop the program. Pressing Ctrl-C will also stop the program.
     '''
+
     try:
         logging.info("START")
         # STEP01: Check to see that the necessary files exist.
@@ -185,15 +187,15 @@ def file_check():
     # Check to see if sound files exists
     for sound in sounds:
         if os.path.isfile('Sounds/' + sound):
-            logging.info("{} file was found!".format(sound))
+            logging.info("%s file was found!", sound)
         else:
-            logging.error("{} file was not found! Make sure ".format(sound) +
-                          "that the {} file exists in the ".format(sound) +
-                          "'Sounds' folder.")
+            logging.error("%s file was not found! Make sure " +
+                          "that the %s file exists in the " +
+                          "'Sounds' folder.", sound, sound)
             file_missing_flag = 1
 
     # If there are no missing files, return to the main function
-    # Otherwise print out message and exit the program
+    # Otherwise print out message in red text and exit the program
     if file_missing_flag == 0:
         return
     else:
@@ -237,12 +239,15 @@ def permission_check():
     for sound in sounds:
         if os.access('Sounds/' + sound, os.R_OK):
             logging.info("User has permission to read the " +
-                         "{} file.".format(sound))
+                         "%s file.", sound)
         else:
             logging.error("User does not have permission to read the " +
-                          "{} file.".format(sound))
+                          "%s file.", sound)
             permission_flag = 1
 
+    # If user has permission to read the files, return to the main
+    # function. Otherwise print out message in red text and exit the
+    # program
     if permission_flag == 0:
         return
     else:
@@ -263,13 +268,13 @@ def read_file(file_name):
 
     logging.info("READING DINOSAUR_FACTS.TXT")
     try:
-        with open(file_name, "r") as facts:     # open the file as read-only
+        with open(file_name, "r") as facts:      # open the file as read-only
             dino_facts = facts.readlines()
         logging.info("The dino_facts list was successfully populated.")
     except IOError:
         print("\033[1;31;40mErrors were encountered. Check the log in the " +
               "'Files' folder for more information.")
-        logging.error("The dino_facts list could not be populated.")
+        logging.error(IOError, "The dino_facts list could not be populated.")
         stop_the_program()
 
     return dino_facts
@@ -292,8 +297,8 @@ def empty_file_check(list_name):
               "'Files' folder for more information.")
         stop_the_program()
     else:
-        logging.info("The dinosaur.txt file is not empty.(This is good. We " +
-                     "don't want an empty file.)")
+        logging.info("The dinosaur.txt file is not empty.(This is good. "
+                     "We don't want an empty file.)")
 
 
 def print_header():
@@ -310,14 +315,14 @@ def print_header():
     '''
 
     print("\n\033[1;37;40m")
-    print("==================================================================================")
-    print("   _  _   ____    ____  _                                    ____                 ")
-    print("  | || | |  _ \  |  _ \(_)_ __   ___  ___  __ _ _   _ _ __  |  _ \  ___ _ __      ")
-    print("  | || |_| | | | | | | | | '_ \ / _ \/ __|/ _` | | | | '__| | | | |/ _ \ '_ \     ")
-    print("  |__   _| |_| | | |_| | | | | | (_) \__ \ (_| | |_| | |    | |_| |  __/ | | |    ")
-    print("     |_| |____/  |____/|_|_| |_|\___/|___/\__,_|\__,_|_|    |____/ \___|_| |_|    ")
-    print("                                                                                  ")
-    print("==================================================================================")
+    print(r"==================================================================================")
+    print(r"   _  _   ____    ____  _                                    ____                 ")
+    print(r"  | || | |  _ \  |  _ \(_)_ __   ___  ___  __ _ _   _ _ __  |  _ \  ___ _ __      ")
+    print(r"  | || |_| | | | | | | | | '_ \ / _ \/ __|/ _` | | | | '__| | | | |/ _ \ '_ \     ")
+    print(r"  |__   _| |_| | | |_| | | | | | (_) \__ \ (_| | |_| | |    | |_| |  __/ | | |    ")
+    print(r"     |_| |____/  |____/|_|_| |_|\___/|___/\__,_|\__,_|_|    |____/ \___|_| |_|    ")
+    print(r"                                                                                  ")
+    print(r"==================================================================================")
     print("\n")
 
 
@@ -325,6 +330,7 @@ def prompt_user_for_input():
     '''
     The prompt_user_for_input function prompts a user to push a button.
     '''
+
     # First line - print all white text
     print("\033[1;37;40mPush the white button to activate the T. Rex.")
     # Second line
@@ -437,7 +443,7 @@ def activate_dinosaur(motor_name, motor_name_enable, sound, sound_length):
     try:
         motor.value = 0.6              # Controls the motor speed
     except ValueError:
-        logging.error("A bad value was specified for the {}. ".format(motor) +
+        logging.error("A bad value was specified for the motor. " +
                       "The value should be between 0 and 1.")
         print("\033[1;31;40mAn error was encountered. Check the log in the " +
               "'Files' folder for more information.\n")
