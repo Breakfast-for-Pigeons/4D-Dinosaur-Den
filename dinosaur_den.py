@@ -1,18 +1,36 @@
 #!/usr/bin/python3
-'''
+"""
 4D Dinosaur Den
 
 Description:
 This program controls the motors of 3 toy dinosaurs and 1 flying
 reptile. A button is pressed to make them move.
 
-This program is also an example of adding color to text displayed to the
-screen.
+....................
+
+Functions:
+- file_check: Checks to see if the necessary files exist
+- permission_check: Checks to see if the user has permission to read
+  the necessary files
+- read_file: Reads the dino_facts file
+- empty_file_check: Checks to see if the dino_facts list is empty
+- print_header: Prints a header
+- prompt_user_for_input: Prompts user to push a button
+- get_roar: Gets one random T. rex sound file
+- get_grunt: Gets one random Triceratops sound file
+- get_bellow: Gets one random Brachiosaurus sound file
+- get_squawk: Gets one random Pteranodon sound file
+- print_dinosaur_fact: Prints a random dinosaur fact
+- activate_dinoaur: Starts the specified motor
+- release_gpio_pins: Realeases the GPIO pins.
+- stop_the_program: Stops the program
+
+....................
 
 Author: Paul Ryan
 
 This program was written on a Raspberry Pi using the Geany IDE.
-'''
+"""
 
 ########################################################################
 #                         Import Modules                               #
@@ -30,27 +48,27 @@ import pygame
 ########################################################################
 
 #  T. rex variables
-t_rex_motor = Motor(20, 16, True)               # forward, backward, pwm
-t_rex_motor_enable = OutputDevice(21)
-white_button = Button(12)
+T_REX_MOTOR = Motor(20, 16, True)               # forward, backward, pwm
+T_REX_MOTOR_ENABLE = OutputDevice(21)
+WHITE_BUTTON = Button(12)
 
 # Triceratops variables
-triceratops_motor = Motor(19, 13, True)         # forward, backward, pwm
-triceratops_motor_enable = OutputDevice(6)
-green_button = Button(26)
+TRICERATOPS_MOTOR = Motor(19, 13, True)         # forward, backward, pwm
+TRICERATOPS_MOTOR_ENABLE = OutputDevice(6)
+GREEN_BUTTON = Button(26)
 
 # Brachiosaurus variables
-brachiosaurus_motor = Motor(23, 18, True)       # forward, backward, pwm
-brachiosaurus_motor_enable = OutputDevice(24)
-blue_button = Button(25)
+BRACHIOSAURUS_MOTOR = Motor(23, 18, True)       # forward, backward, pwm
+BRACHIOSAURUS_MOTOR_ENABLE = OutputDevice(24)
+BLUE_BUTTON = Button(25)
 
 # Pteranodon variables
-pteranodon_motor = Motor(2, 3, True)            # forward, backward, pwm
-pteranodon_motor_enable = OutputDevice(4)
-yellow_button = Button(17)
+PTERANODON_MOTOR = Motor(2, 3, True)            # forward, backward, pwm
+PTERANODON_MOTOR_ENABLE = OutputDevice(4)
+YELLOW_BUTTON = Button(17)
 
 # Other variables
-red_button = Button(9)
+RED_BUTTON = Button(9)
 
 ########################################################################
 #                           Initialize                                 #
@@ -58,7 +76,7 @@ red_button = Button(9)
 
 pygame.mixer.init()
 
-logging.basicConfig(filename='Files/Dinosaur_Den.log', filemode='w',
+logging.basicConfig(filename='Files/dinosaur_den.log', filemode='w',
                     level=logging.INFO,
                     format='%(asctime)s %(levelname)s: %(message)s',
                     datefmt='%m/%d/%y %I:%M:%S %p:')
@@ -97,56 +115,56 @@ def main():
         # function associated with that button.
         while True:
 
-            if white_button.is_pressed:
+            if WHITE_BUTTON.is_pressed:
                 # STEP08.A.1: Load the sound file
                 roar, roar_length = get_roar()
                 # STEP08.A.2: Print out a random dinosaur fun fact
                 print_dinosaur_fact(dino_facts)
                 # STEP08.A.3: Move the T. rex for the duration of the
                 # sound file
-                activate_dinosaur(t_rex_motor, t_rex_motor_enable, roar,
+                activate_dinosaur(T_REX_MOTOR, T_REX_MOTOR_ENABLE, roar,
                                   roar_length)
                 # STEP08.A.4: Prompt the user to press a button
                 prompt_user_for_input()
 
-            if green_button.is_pressed:
+            if GREEN_BUTTON.is_pressed:
                 # STEP08.B.1: Load the sound file
                 grunt, grunt_length = get_grunt()
                 # STEP08.B.2: Print out a random dinosaur fun fact
                 print_dinosaur_fact(dino_facts)
                 # STEP08.B.3: Move the Triceratops for the duration of
                 # the sound file
-                activate_dinosaur(triceratops_motor, triceratops_motor_enable,
+                activate_dinosaur(TRICERATOPS_MOTOR, TRICERATOPS_MOTOR_ENABLE,
                                   grunt, grunt_length)
                 # STEP08.B.4: Prompt the user to press a button
                 prompt_user_for_input()
 
-            if blue_button.is_pressed:
+            if BLUE_BUTTON.is_pressed:
                 # STEP08.C.1: Load the sound file
                 bellow, bellow_length = get_bellow()
                 # STEP08.C.2: Print out a random dinosaur fun fact
                 print_dinosaur_fact(dino_facts)
                 # STEP08.C.3: Move the Brachiosaurus for the duration of
                 # the sound file
-                activate_dinosaur(brachiosaurus_motor,
-                                  brachiosaurus_motor_enable, bellow,
+                activate_dinosaur(BRACHIOSAURUS_MOTOR,
+                                  BRACHIOSAURUS_MOTOR_ENABLE, bellow,
                                   bellow_length)
                 # STEP08.C.4: Prompt the user to press a button
                 prompt_user_for_input()
 
-            if yellow_button.is_pressed:
+            if YELLOW_BUTTON.is_pressed:
                 # STEP08.D.1: Load the sound file
                 squawk, squawk_length = get_squawk()
                 # STEP08.D.2: Print out a random dinosaur fun fact
                 print_dinosaur_fact(dino_facts)
                 # STEP08.D.3: Move the Pteranodon for the duration of
                 # the sound file
-                activate_dinosaur(pteranodon_motor, pteranodon_motor_enable,
+                activate_dinosaur(PTERANODON_MOTOR, PTERANODON_MOTOR_ENABLE,
                                   squawk, squawk_length)
                 # STEP08.D.4: Prompt the user to press a button
                 prompt_user_for_input()
 
-            if red_button.is_pressed:
+            if RED_BUTTON.is_pressed:
                 # STEP08.E.1: Stop the program
                 stop_the_program()
 
@@ -155,12 +173,14 @@ def main():
 
 
 def file_check():
-    '''
-    The file_check function checks to see if the necessary files exist.
+    """
+    Checks to see if the necessary files exist
+
+    This function checks to see if the necessary files exist.
     If they all exist, the program will continue.
     If a file is missing, the program will print out a message to the
     screen and then exit.
-    '''
+    """
 
     file_missing_flag = 0
 
@@ -206,12 +226,13 @@ def file_check():
 
 
 def permission_check():
-    '''
-    The permission_check function checks to see if the user has
-    permission to read the necessary files. If so, the program will
-    continue. If not, the program will print out a message to the screen
-    and then exit.
-    '''
+    """
+    Checks to see if the user has permission to read the necessary files
+
+    This function checks to see if the user has permission to read the
+    necessary files. If so, the program will continue. If not, the
+    program will print out a message to the screen and then exit.
+    """
 
     permission_flag = 0
 
@@ -257,14 +278,22 @@ def permission_check():
 
 
 def read_file(file_name):
-    '''
-    The read_file function has one parameter: file_name. In this
-    program, the argument passed in will be the dinosaur_facts.txt file
-    located in the 'Files' folder. Each line of the file will be an
-    element in the dino_facts list. It will then return the dino_facts
-    list to the main function. If the program is unable to populate the
-    list, it will display an error message and then exit the program.
-    '''
+    """
+    Reads the dino_facts file
+
+    This function reads the dino_facts file and populates a list. Each
+    line of the file will be an element in the dino_facts list. It will
+    then return the dino_facts list to the main function. If the program
+    is unable to populate the list, it will display an error message and
+    then exit the program.
+
+    Arguments:
+        file_name: The dinosaur_facts.txt file located in the 'Files'
+        folder.
+
+    Returns:
+        dino_facts: a list of dinosaur facts
+    """
 
     logging.info("READING DINOSAUR_FACTS.TXT")
     try:
@@ -281,13 +310,17 @@ def read_file(file_name):
 
 
 def empty_file_check(list_name):
-    '''
-    The empty_file_check function has one parameter: file_name. In this
-    program, the argument passed in will be the dino_facts list. It will
-    checks to see if the list is empty. If it is, the program will print
-    a message to the screen. If it is not empty, the program will
-    continue.
-    '''
+    """
+    Checks to see if the dino_facts list is empty
+
+    This function will check to see if the list is empty. If it is, the
+    program will print a message to the screen and then exit. If the
+    file is not empty, the program will continue.
+
+    Arguments:
+        list_name: the dino_facts list
+
+    """
 
     logging.info("EMPTY FILE CHECK")
     if list_name == []:
@@ -302,17 +335,21 @@ def empty_file_check(list_name):
 
 
 def print_header():
-    '''
-    The print_header function will print out the program header to the
+    """
+    Prints a header
+
+
+    This function will print out the program header to the
     screen.
-    This is the only part of the program that doesn't adhere to
-    PEP standards (exceeds recommended line length). I decided that
+
+    This is the only part of the program that doesn't adhere to the PEP
+    standards (It exceeds recommended line length). I decided that
     "Readability Counts" and "Beautiful is better than ugly" from The
     Zen of Python should trump the PEP standards in this case. I had
     rewritten it to meet the PEP standard, but is was ugly and
     unreadable. This is much better. The program still compiles and runs
     OK.
-    '''
+    """
 
     print("\n\033[1;37;40m")
     print(r"==================================================================================")
@@ -327,9 +364,11 @@ def print_header():
 
 
 def prompt_user_for_input():
-    '''
-    The prompt_user_for_input function prompts a user to push a button.
-    '''
+    """
+    Prompts user to push a button
+
+    This function prompts a user to push a button.
+    """
 
     # First line - print all white text
     print("\033[1;37;40mPush the white button to activate the T. Rex.")
@@ -357,20 +396,30 @@ def prompt_user_for_input():
 
 
 def print_dinosaur_fact(dino_facts):
-    '''
-    The print_dinosaur_fact function takes the dino_facts list as its
-    input. It will select a random fact and print it out.
-    '''
+    """
+    Prints a random dinosaur fact
+
+    This function will select a random fact from the dino_facts list and
+    print it out.
+
+    Arguments:
+        dino_facts: a list of dinosaur_facts
+    """
 
     print("\033[1;34;40mDINOSAUR FUN FACT:")
     print(random.choice(dino_facts))
 
 
 def get_roar():
-    '''
-    The get_roar function will randomly select one of the T. rex roar
-    files and return it and its file length to the main function.
-    '''
+    """
+    Gets one random T. rex sound file
+
+    This function will randomly select one of the T. rex roar
+    sound files.
+
+    Returns:
+        a sound file and the length of the file in seconds
+    """
 
     # The key/value pair is sound file name : length of file in seconds
     roars = {'Sounds/T_rex1.ogg': 6.5, 'Sounds/T_rex2.ogg': 3,
@@ -382,10 +431,15 @@ def get_roar():
 
 
 def get_grunt():
-    '''
-    The get_grunt function will randomly select one of the Triceratops
-    grunt files and return it and its file length to the main function.
-    '''
+    """
+    Gets one random Triceratops sound file
+
+    This function will randomly select one of the Triceratops grunt
+    sound files.
+
+    Returns:
+        a sound file and the length of the file in seconds
+    """
 
     # The key/value pair is sound file name : length of file in seconds
     grunts = {'Sounds/Triceratops1.ogg': 5, 'Sounds/Triceratops2.ogg': 4,
@@ -397,10 +451,15 @@ def get_grunt():
 
 
 def get_bellow():
-    '''
-    The get_bellow function will randomly select one of the Brachiosaurus
-    bellow files and return it and its file length to the main function.
-    '''
+    """
+    Gets one random Brachiosaurus sound file
+
+    This function will randomly select one of the Brachiosaurus bellow
+    sound files.
+
+    Returns:
+        a sound file and the length of the file in seconds
+    """
 
     # The key/value pair is sound file name : length of file in seconds
     bellows = {'Sounds/Brachiosaurus1.ogg': 5, 'Sounds/Brachiosaurus2.ogg': 4,
@@ -412,10 +471,15 @@ def get_bellow():
 
 
 def get_squawk():
-    '''
-    The get_squawk function will randomly select one of the Pteranodon
-    squawk files and return it and its file length to the main function.
-    '''
+    """
+    Gets one random Pteranodon sound file
+
+    This function will randomly select one of the Pteranodon squawk
+    sound files.
+
+    Returns:
+        a sound file and the length of the file in seconds
+    """
 
     # The key/value pair is sound file name : length of file in seconds
     squawks = {'Sounds/Pteranodon1.ogg': 6.5, 'Sounds/Pteranodon2.ogg': 6.5,
@@ -425,17 +489,23 @@ def get_squawk():
 
 
 def activate_dinosaur(motor_name, motor_name_enable, sound, sound_length):
-    '''
-    The activate_dinosaur function will play the sound file and then
-    activate the specified motor for the duration of the sound file.
-    This function has 4 parameters: motor_name, motor_name_enable,
-    sound (a sound file) and sound_length (the length of the sound file
-    in seconds).
-    The arguments passed in will vary depending on which button was
-    pressed. For example, if the T. rex button was pressed, the
-    arguments passed in will be t_rex_motor, t_rex_motor_enable, roar,
-    and roar_length.
-    '''
+    """
+    Starts the specific motor
+
+    This function will play the sound file and activate the specified
+    motorfor the duration of the sound file.
+
+    Arguments:
+        motor_name: The name of the motor selected
+        motor_name_enable: The enable pin of the motor selected
+        sound: The randomly selected dinosaur sound file
+        sound_length: The length of the sound file in seconds
+
+        The arguments passed in will vary depending on which button was
+        pressed. For example, if the T. rex button was pressed, the
+        arguments passed in will be T_REX_MOTOR, T_REX_MOTOR_ENABLE,
+        roar, and roar_length.
+    """
 
     motor = motor_name
     motor_enable = motor_name_enable
@@ -456,30 +526,32 @@ def activate_dinosaur(motor_name, motor_name_enable, sound, sound_length):
 
 
 def release_gpio_pins():
-    '''
-    The release_gpio_pins function realeases the gpio pins.
-    '''
+    """
+    Realeases the GPIO pins.
+    """
 
-    t_rex_motor.close()
-    t_rex_motor_enable.close()
-    triceratops_motor.close()
-    triceratops_motor_enable.close()
-    brachiosaurus_motor.close()
-    brachiosaurus_motor_enable.close()
-    pteranodon_motor.close()
-    pteranodon_motor_enable.close()
-    white_button.close()
-    green_button.close()
-    blue_button.close()
-    yellow_button.close()
-    red_button.close()
+    T_REX_MOTOR.close()
+    T_REX_MOTOR_ENABLE.close()
+    TRICERATOPS_MOTOR.close()
+    TRICERATOPS_MOTOR_ENABLE.close()
+    BRACHIOSAURUS_MOTOR.close()
+    BRACHIOSAURUS_MOTOR_ENABLE.close()
+    PTERANODON_MOTOR.close()
+    PTERANODON_MOTOR_ENABLE.close()
+    WHITE_BUTTON.close()
+    GREEN_BUTTON.close()
+    BLUE_BUTTON.close()
+    YELLOW_BUTTON.close()
+    RED_BUTTON.close()
 
 
 def stop_the_program():
-    '''
-    The stop_the_program function will call the release_gpio_pins
-    function, print a message to the screen, and then exit the program.
-    '''
+    """
+    Stops the program
+
+    This function will call the release_gpio_pins function, print a
+    message to the screen, and then exit the program.
+    """
 
     release_gpio_pins()
     print("\033[1;37;40mExiting program.\n")
